@@ -1,17 +1,39 @@
 import React, {useMemo, useState} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput} from 'react-native'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
+import * as ImagePicker from 'expo-image-picker';
+import {StatusBar} from "expo-status-bar";
 
 const options = [
     {id: '1', title: 'Add from Camera', icon: 'camera-outline', iconLib: Ionicons},
-    {id: '2', title: 'Manual Addition', icon: 'edit', iconLib: MaterialIcons},
+    {id: '2', title: 'Add from Gallery', icon: 'image-outline', iconLib: Ionicons},
+    {id: '3', title: 'Manual Addition', icon: 'edit', iconLib: MaterialIcons},
 ]
+
 
 function AddPlantScreen({navigation}: { navigation: any }) {
     const onPressOption = (id: string) => {
-        if (id === '1') navigation.navigate('CameraScreen')
-        else if (id === '2') navigation.navigate('ManualAddScreen')
+        if (id === '1') navigation.navigate('UploadPlantImageFromCameraScreen')
+        else if (id === '2') navigation.navigate('UploadPlantImageFromGalleryScreen')
     }
+
+    const [image, setImage] = useState<string | null>(null);
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images', 'videos'],
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
 
     const renderItem = ({item}: { item: any }) => {
         const IconComponent = item.iconLib
@@ -38,31 +60,32 @@ function AddPlantScreen({navigation}: { navigation: any }) {
     }, [options, search])
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Add Plant</Text>
-            <Text style={styles.subtitle}>
-                In this screen, you can add a new plant by choosing from all the options below.
-            </Text>
+        <>
+            <View style={styles.container}>
+                <Text style={styles.subtitle}>
+                    In this screen, you can add a new plant by choosing from all the options below.
+                </Text>
 
-            <TextInput
-                placeholder="Search"
-                value={search}
-                onChangeText={setSearch}
-                style={styles.textInput}
-                clearButtonMode="while-editing"
-            />
+                <TextInput
+                    placeholder="Search"
+                    value={search}
+                    onChangeText={setSearch}
+                    style={styles.textInput}
+                    clearButtonMode="while-editing"
+                />
 
-            {optionsToShow.length === 0 && <Text>No Options To Show...</Text>}
+                {optionsToShow.length === 0 && <Text>No Options To Show...</Text>}
 
-            <FlatList
-                data={optionsToShow}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-                ItemSeparatorComponent={() => <View style={styles.separator}/>}
-                contentContainerStyle={{marginTop: 16}}
-            />
+                <FlatList
+                    data={optionsToShow}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                    ItemSeparatorComponent={() => <View style={styles.separator}/>}
+                    contentContainerStyle={{marginTop: 16}}
+                />
 
-        </View>
+            </View>
+        </>
     )
 }
 
@@ -71,7 +94,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-        paddingTop: 60,
+        paddingTop: 16,
     },
     title: {
         fontSize: 34,
