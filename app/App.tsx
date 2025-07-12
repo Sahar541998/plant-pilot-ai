@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import {NavigationContainer} from '@react-navigation/native'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {Ionicons} from '@expo/vector-icons' // Expo vector icons
+import {MyPlantsScreen} from './screens/my-plants-screen/MyPlantsScreen'
+import {ProfileScreen} from "./screens/profile-screen/Profile";
+import {AddPlantScreen} from "./screens/add-plant-screen/AddPlant";
+
+const Tab = createBottomTabNavigator()
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                screenOptions={({route}) => ({
+                    tabBarIcon: ({color, size}) => {
+                        let iconName: any = 'leaf'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+                        if (route.name === 'MyPlants') {
+                            iconName = 'leaf'
+                        } else if (route.name === 'AddPlant') {
+                            iconName = 'add-circle-outline'
+                        } else if (route.name === 'Profile') {
+                            iconName = 'person-outline'
+                        }
+
+                        // Make icons subtle and small to match Apple style
+                        return <Ionicons name={iconName} size={size * 0.8} color={color}/>
+                    },
+                    tabBarActiveTintColor: '#007AFF', // Apple's blue tint
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarLabelStyle: {fontSize: 12, fontWeight: '600', paddingBottom: 4},
+                    headerShown: false,
+                    tabBarStyle: {
+                        borderTopWidth: 0.5,
+                        borderTopColor: '#ccc',
+                    },
+                })}
+            >
+                <Tab.Screen name="MyPlants" component={MyPlantsScreen} options={{title: 'My Plants'}}/>
+                <Tab.Screen name="AddPlant" component={AddPlantScreen} options={{title: 'Add Plant'}}/>
+                <Tab.Screen name="Profile" component={ProfileScreen} options={{title: 'Profile'}}/>
+            </Tab.Navigator>
+        </NavigationContainer>
+    )
+}

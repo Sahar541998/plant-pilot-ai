@@ -11,14 +11,21 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.4.2",
+    "@react-navigation/native": "^7.1.14",
     "expo": "~53.0.17",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
-    "react-native": "0.79.5"
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
+    "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
-    "@expo/metro-runtime": "~5.0.4",
     "@babel/core": "^7.25.2",
+    "@expo/metro-runtime": "~5.0.4",
     "@types/react": "~19.0.10",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
     "@typescript-eslint/parser": "^8.36.0",
@@ -27,8 +34,6 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.6.2",
-    "react-dom": "^19.0.0",
-    "react-native-web": "^0.20.0",
     "typescript": "~5.8.3"
   },
   "private": true
