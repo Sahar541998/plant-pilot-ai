@@ -14,25 +14,16 @@ import * as FileSystem from 'expo-file-system';
 import {AddPlantFromImageStackParamList} from "../AddPlantScreen";
 import {RouteProp} from "@react-navigation/native";
 import {Ionicons} from "@expo/vector-icons";
+import {DetectedPlant} from "./DetectedPlant";
 
 
-type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'AnalyzeImage'>;
+type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'AnalyzeImageScreen'>;
 
 type Props = {
     route: AnalyzeImageRouteProp;
 };
 
-type DetectedPlant = {
-    pretty_name: string;
-    name: string;
-    common_names: string[];
-    family: string;
-    genus: string;
-    image_url: string;
-    match_percentage: number;
-}
-
-const AnalyzeImage: React.FC<Props> = ({route}) => {
+const AnalyzeImage: React.FC<Props> = ({route, navigation}: any) => {
     const {imageUri} = route.params;
 
     const [base64, setBase64] = useState<string>();
@@ -115,19 +106,25 @@ const AnalyzeImage: React.FC<Props> = ({route}) => {
     }
 
     return (
-        <PlantListScreen plants={analyzeImageResponse.results}></PlantListScreen>
+        <PlantListScreen navigation={navigation} plants={analyzeImageResponse.results}></PlantListScreen>
     )
 }
 
 type PlantListScreenProps = {
     plants: DetectedPlant[];
+    navigation: any
 }
 
-const PlantListScreen: React.FC<PlantListScreenProps> = ({plants}) => {
+const PlantListScreen: React.FC<PlantListScreenProps> = ({plants, navigation}) => {
+    const onPressOption = (plant: DetectedPlant) => {
+        navigation.navigate('InsertPlantFormScreen', plant)
+
+    }
+
     const renderItem: ListRenderItem<DetectedPlant> = ({item}) => (
         <TouchableOpacity
             style={styles.itemContainer}
-            onPress={() => alert(`Selected ${item.pretty_name}`)}
+            onPress={()=> onPressOption(item)}
         >
             <Image
                 source={{uri: item.image_url}}

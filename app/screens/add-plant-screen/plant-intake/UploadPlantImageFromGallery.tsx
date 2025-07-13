@@ -49,7 +49,7 @@ function UploadPlantImageFromGallery({navigation}: { navigation: any }) {
                     />
                     <Button
                         title="Analyze"
-                        onPress={() => navigation.navigate('AnalyzeImage', {imageUri})}
+                        onPress={() => navigation.navigate('AnalyzeImageScreen', {imageUri})}
                     />
                 </>
             ) : (

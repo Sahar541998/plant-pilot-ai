@@ -5,13 +5,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {View} from "react-native";
 import {UploadPlantImageFromGallery} from "./plant-intake/UploadPlantImageFromGallery";
 import {AnalyzeImage} from "./plant-intake/AnalyzeImage";
+import {InsertPlantForm} from "./plant-intake/InsertPlantForm";
 // navigation/types.ts
 export type AddPlantFromImageStackParamList = {
-    AnalyzeImage: { imageUri: string };
+    AnalyzeImageScreen: { imageUri: string };
     UploadPlantImageFromManualScreen: undefined;
     UploadPlantImageFromGalleryScreen: undefined;
     UploadPlantImageFromCameraScreen: undefined;
-    AddNewPlants: undefined;
+    AddNewPlantsScreen: undefined;
+    InsertPlantFormScreen: { prettyName: string }
     // Add other screens here as needed
 };
 
@@ -23,7 +25,7 @@ function AddPlantFromImageStackScreen() {
 
         <AddPlantFromImageStack.Navigator>
             <AddPlantFromImageStack.Screen
-                name="AddNewPlants"
+                name="AddNewPlantsScreen"
                 options={{title: 'Add new plants'}}
                 component={AddPlantScreen}/>
 
@@ -38,16 +40,17 @@ function AddPlantFromImageStackScreen() {
                 component={UploadPlantImageFromGallery}/>
 
             <AddPlantFromImageStack.Screen
-                name="UploadPlantImageFromManualScreen"
-                options={{title: "Manual"}}
-                component={() => <View/>}/>
-
+                name="InsertPlantFormScreen"
+                options={{title: "Insert Plant"}}
+                component={InsertPlantForm}
+            />
 
             <AddPlantFromImageStack.Screen
-                name="AnalyzeImage"
+                name="AnalyzeImageScreen"
                 options={{title: "Analyze Image"}}
                 component={AnalyzeImage}
             />
+
         </AddPlantFromImageStack.Navigator>
 
     )

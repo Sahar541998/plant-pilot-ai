@@ -15,6 +15,7 @@ function AddPlantScreen({navigation}: { navigation: any }) {
     const onPressOption = (id: string) => {
         if (id === '1') navigation.navigate('UploadPlantImageFromCameraScreen')
         else if (id === '2') navigation.navigate('UploadPlantImageFromGalleryScreen')
+        else if (id === '3') navigation.navigate('InsertPlantFormScreen')
     }
 
     const [image, setImage] = useState<string | null>(null);
