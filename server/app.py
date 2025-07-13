@@ -108,6 +108,7 @@ def parse_plantnet_results(api_response: dict):
             score = result.get("score", 0)
 
             simplified_results.append({
+                "pretty_name": species.get("scientificNameWithoutAuthor", ""),
                 "name": species.get("scientificName", ""),
                 "match_percentage": round(score * 100, 2),
                 "common_names": species.get("commonNames", []),
