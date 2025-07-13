@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, ListRenderItem, TouchableOpacity, FlatList, StyleSheet} from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    ListRenderItem,
+    TouchableOpacity,
+    FlatList,
+    StyleSheet,
+    ActivityIndicator
+} from 'react-native';
 import {serverPath} from "../../../ServerPath";
 import * as FileSystem from 'expo-file-system';
 import {AddPlantFromImageStackParamList} from "../AddPlantScreen";
@@ -66,11 +75,7 @@ const AnalyzeImage: React.FC<Props> = ({route}) => {
 
                 debugger;
                 const data = await response.json();
-                if (!data || !data.results) {
-                    setAnalyzeImageResponse(data)
-                } else {
-                    console.error("Error in response:", data);
-                }
+                setAnalyzeImageResponse(data)
             } catch (e) {
                 console.error('Error analyzing image:', e);
             }
@@ -93,24 +98,24 @@ const AnalyzeImage: React.FC<Props> = ({route}) => {
         );
     }
 
+
     if (!analyzeImageResponse) {
         return (
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                <Image
-                    key={"image"}
-                    source={{uri: imageUri}}
-                    style={{width: 300, height: 400, borderRadius: 8}}
-                    resizeMode="contain"
-                />
-                <Text>Analyzing...</Text>
+                <ActivityIndicator size="large" color="#4CAF50"/>
+            </View>
+        )
+    }
+    if (!analyzeImageResponse.results || analyzeImageResponse.results.length === 0) {
+        return (
+            <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                <Text>No plants detected</Text>
             </View>
         )
     }
 
     return (
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <Text>|{JSON.stringify(analyzeImageResponse)}|</Text>
-        </View>
+        <PlantListScreen plants={analyzeImageResponse.results}></PlantListScreen>
     )
 }
 
@@ -129,7 +134,7 @@ const PlantListScreen: React.FC<PlantListScreenProps> = ({plants}) => {
                 style={styles.image}
             />
 
-            <Text style={styles.title}>{item.pretty_name}</Text>
+            <Text style={styles.title}>{item.pretty_name} - ({item.match_percentage}%)</Text>
             <Ionicons name="chevron-forward" size={24} color="#ccc"/>
         </TouchableOpacity>
     );
@@ -146,9 +151,11 @@ const PlantListScreen: React.FC<PlantListScreenProps> = ({plants}) => {
 
 const styles = StyleSheet.create({
     itemContainer: {
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         padding: 16,
+        display: 'flex',
         backgroundColor: 'white',
     },
     image: {
