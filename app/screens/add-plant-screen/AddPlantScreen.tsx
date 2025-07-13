@@ -5,15 +5,26 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {View} from "react-native";
 import {UploadPlantImageFromGallery} from "./plant-intake/UploadPlantImageFromGallery";
 import {AnalyzeImage} from "./plant-intake/AnalyzeImage";
+// navigation/types.ts
+export type AddPlantFromImageStackParamList = {
+    AnalyzeImage: { imageUri: string };
+    UploadPlantImageFromManualScreen: undefined;
+    UploadPlantImageFromGalleryScreen: undefined;
+    UploadPlantImageFromCameraScreen: undefined;
+    AddNewPlants: undefined;
+    // Add other screens here as needed
+};
 
-const AddPlantFromImageStack = createNativeStackNavigator()
+const AddPlantFromImageStack = createNativeStackNavigator<AddPlantFromImageStackParamList>()
+
 
 function AddPlantFromImageStackScreen() {
     return (
 
         <AddPlantFromImageStack.Navigator>
             <AddPlantFromImageStack.Screen
-                name="Add New Plants"
+                name="AddNewPlants"
+                options={{title: 'Add new plants'}}
                 component={AddPlantScreen}/>
 
             <AddPlantFromImageStack.Screen
@@ -35,7 +46,8 @@ function AddPlantFromImageStackScreen() {
             <AddPlantFromImageStack.Screen
                 name="AnalyzeImage"
                 options={{title: "Analyze Image"}}
-                component={(params: any) => <AnalyzeImage {...params}/>}/>
+                component={AnalyzeImage}
+            />
         </AddPlantFromImageStack.Navigator>
 
     )

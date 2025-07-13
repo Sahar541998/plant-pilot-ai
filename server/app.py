@@ -85,7 +85,7 @@ def get_plantnet_results(image_base64: str):
     image_file.name = 'image.jpeg'  # give it a filename
 
     params = {
-        'include-related-images': 'false',
+        'include-related-images': 'true',
         'no-reject': 'false',
         'nb-results': '5',
         'lang': 'he',
