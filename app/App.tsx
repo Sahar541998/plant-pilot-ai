@@ -5,6 +5,7 @@ import {Ionicons} from '@expo/vector-icons' // Expo vector icons
 import {MyPlantsScreen} from './screens/my-plants-screen/MyPlantsScreen'
 import {ProfileScreen} from "./screens/profile-screen/Profile";
 import {AddPlantFromImageStackScreen} from "./screens/add-plant-screen/AddPlantScreen";
+import {PlantIntakeStackScreen} from "./screens/add-plant-screen/plant-intake/PlantIntakeStack";
 
 const Tab = createBottomTabNavigator()
 
@@ -44,7 +45,7 @@ export default function App() {
                 />
                 <Tab.Screen
                     name="AddPlant"
-                    component={AddPlantFromImageStackScreen}
+                    component={PlantIntakeStackScreen}
                     options={{title: 'Add Plant'}}
                 />
                 <Tab.Screen

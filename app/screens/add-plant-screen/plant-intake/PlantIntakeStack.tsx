@@ -1,12 +1,11 @@
-import {UploadPlantImageFromCamera} from "./plant-intake/UploadPlantImageFromCamera";
-import React from "react";
-import {AddPlantScreen} from "./AddPlant";
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {View} from "react-native";
-import {UploadPlantImageFromGallery} from "./plant-intake/UploadPlantImageFromGallery";
-import {AnalyzeImage} from "./plant-intake/AnalyzeImage";
-import {InsertPlantForm} from "./plant-intake/InsertPlantForm";
-// navigation/types.ts
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {AddPlantScreen} from "../AddPlant";
+import {UploadPlantImageFromCamera} from "./UploadPlantImageFromCamera";
+import {AnalyzeImage} from "./AnalyzeImage";
+import {InsertPlantForm} from "./InsertPlantForm";
+import {UploadPlantImageFromGallery} from "./UploadPlantImageFromGallery";
+
+
 export type PlantIntakeStackParamList = {
     AnalyzeImageScreen: { imageUri: string };
     UploadPlantImageFromManualScreen: undefined;
@@ -20,7 +19,7 @@ export type PlantIntakeStackParamList = {
 const PlantIntakeStack = createNativeStackNavigator<PlantIntakeStackParamList>()
 
 
-function AddPlantFromImageStackScreen() {
+function PlantIntakeStackScreen() {
     return (
 
         <PlantIntakeStack.Navigator>
@@ -56,4 +55,4 @@ function AddPlantFromImageStackScreen() {
     )
 }
 
-export {AddPlantFromImageStackScreen}
+export {PlantIntakeStackScreen}
