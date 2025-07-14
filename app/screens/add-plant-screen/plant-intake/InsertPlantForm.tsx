@@ -8,22 +8,29 @@ import {RouteProp} from "@react-navigation/native";
 import {DetectedPlant} from "./DetectedPlant";
 import ScrollView = Animated.ScrollView;
 import * as ImagePicker from 'expo-image-picker';
+import {addPlant} from "../../../utils/plantsStorage";
 
 
 type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'InsertPlantFormScreen'>;
 
 type Props = {
     route: AnalyzeImageRouteProp;
+    navigation: any,
     plant?: DetectedPlant;
 };
 
 
-const InsertPlantForm: React.FC<Props> = ({route, plant}) => {
+const InsertPlantForm: React.FC<Props> = ({route, plant, navigation}) => {
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [image, setImage] = useState<string | null>(null);
+
+    const onSubmit = async () => {
+        await addPlant({name: name})
+        navigation.navigate('MyPlants')
+    }
 
     const pickImage = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -87,7 +94,7 @@ const InsertPlantForm: React.FC<Props> = ({route, plant}) => {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.submitButton}>
+                <TouchableOpacity onPress={onSubmit} style={styles.submitButton}>
                     <Text style={styles.submitButtonText}>Create Contact</Text>
                 </TouchableOpacity>
             </ScrollView>

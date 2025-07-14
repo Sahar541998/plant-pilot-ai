@@ -21,9 +21,10 @@ type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'Analyze
 
 type Props = {
     route: AnalyzeImageRouteProp;
+    navigation: any
 };
 
-const AnalyzeImage: React.FC<Props> = ({route, navigation}: any) => {
+const AnalyzeImage: React.FC<Props> = ({route, navigation}) => {
     const {imageUri} = route.params;
 
     const [base64, setBase64] = useState<string>();
@@ -124,7 +125,7 @@ const PlantListScreen: React.FC<PlantListScreenProps> = ({plants, navigation}) =
     const renderItem: ListRenderItem<DetectedPlant> = ({item}) => (
         <TouchableOpacity
             style={styles.itemContainer}
-            onPress={()=> onPressOption(item)}
+            onPress={() => onPressOption(item)}
         >
             <Image
                 source={{uri: item.image_url}}
