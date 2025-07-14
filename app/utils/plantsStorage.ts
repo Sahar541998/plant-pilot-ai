@@ -4,7 +4,8 @@ import {appendToList, getItem, setItem} from "./storage";
 const key = 'plants-list';
 
 export type SavedPlant = {
-    name: string
+    name: string,
+    imageURL: string
 }
 
 const addPlant = (savedPlant: SavedPlant) => {
