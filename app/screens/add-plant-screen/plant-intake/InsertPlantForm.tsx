@@ -3,12 +3,12 @@ import {
     StyleSheet, KeyboardAvoidingView,
     View, TouchableOpacity, Animated, Platform, Image, TextInput, Text
 } from 'react-native';
-import {PlantIntakeStackParamList} from "../AddPlantScreen";
 import {RouteProp} from "@react-navigation/native";
 import {DetectedPlant} from "./DetectedPlant";
 import ScrollView = Animated.ScrollView;
 import * as ImagePicker from 'expo-image-picker';
 import {addPlant} from "../../../utils/plantsStorage";
+import {PlantIntakeStackParamList} from "./PlantIntakeStack";
 
 
 type AnalyzeImageRouteProp = RouteProp<PlantIntakeStackParamList, 'InsertPlantFormScreen'>;
@@ -25,10 +25,10 @@ const InsertPlantForm: React.FC<Props> = ({route, plant, navigation}) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [image, setImage] = useState<string | null>(null);
+    const [image, setImage] = useState<string>();
 
     const onSubmit = async () => {
-        await addPlant({name: name})
+        await addPlant({name: name, imageURL: image})
         navigation.navigate('MyPlants')
     }
 

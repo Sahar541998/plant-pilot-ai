@@ -5,7 +5,7 @@ const key = 'plants-list';
 
 export type SavedPlant = {
     name: string,
-    imageURL: string
+    imageURL: string | undefined
 }
 
 const addPlant = (savedPlant: SavedPlant) => {

@@ -4,8 +4,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {Ionicons} from '@expo/vector-icons' // Expo vector icons
 import {MyPlantsScreen} from './screens/my-plants-screen/MyPlantsScreen'
 import {ProfileScreen} from "./screens/profile-screen/Profile";
-import {AddPlantFromImageStackScreen} from "./screens/add-plant-screen/AddPlantScreen";
 import {PlantIntakeStackScreen} from "./screens/add-plant-screen/plant-intake/PlantIntakeStack";
+import {PlantOverviewStackScreen} from "./screens/plant-screen/PlantOverviewStackScreen";
+import {PlantsOverviewStackScreen} from "./screens/my-plants-screen/PlantsOverviewStackScreen";
 
 const Tab = createBottomTabNavigator()
 
@@ -40,7 +41,7 @@ export default function App() {
             >
                 <Tab.Screen
                     name="MyPlants"
-                    component={MyPlantsScreen}
+                    component={PlantsOverviewStackScreen}
                     options={{title: 'My Plants'}}
                 />
                 <Tab.Screen

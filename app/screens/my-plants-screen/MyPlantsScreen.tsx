@@ -11,6 +11,7 @@ import {
 import React, {useEffect} from "react";
 import {loadPlants, SavedPlant} from "../../utils/plantsStorage";
 import {Ionicons} from "@expo/vector-icons";
+import {PlantOverview} from "./PlantOverview";
 
 type MyPlantsScreenProps = {
     navigation: any;
@@ -50,10 +51,9 @@ const MyPlantsScreen: React.FC<MyPlantsScreenProps> = ({navigation}) => {
 
 
     return (
-        <>
-            <Text style={{fontSize: 24, fontWeight: '600'}}>My Plants</Text>
+        <View>
             <MyPlantListScreen navigation={navigation} myPlants={plants}/>
-        </>
+        </View>
     )
 }
 type PlantListScreenProps = {
@@ -64,7 +64,7 @@ type PlantListScreenProps = {
 
 const MyPlantListScreen: React.FC<PlantListScreenProps> = ({myPlants, navigation}) => {
     const onPressOption = (plant: SavedPlant) => {
-        navigation.navigate('InsertPlantFormScreen', plant)
+        navigation.navigate('PlantOverviewScreen', {plantId: plant.name})
 
     }
 
