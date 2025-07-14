@@ -11,13 +11,13 @@ import {
 } from 'react-native';
 import {serverPath} from "../../../ServerPath";
 import * as FileSystem from 'expo-file-system';
-import {AddPlantFromImageStackParamList} from "../AddPlantScreen";
+import {PlantIntakeStackParamList} from "../AddPlantScreen";
 import {RouteProp} from "@react-navigation/native";
 import {Ionicons} from "@expo/vector-icons";
 import {DetectedPlant} from "./DetectedPlant";
 
 
-type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'AnalyzeImageScreen'>;
+type AnalyzeImageRouteProp = RouteProp<PlantIntakeStackParamList, 'AnalyzeImageScreen'>;
 
 type Props = {
     route: AnalyzeImageRouteProp;

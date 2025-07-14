@@ -7,7 +7,7 @@ import {UploadPlantImageFromGallery} from "./plant-intake/UploadPlantImageFromGa
 import {AnalyzeImage} from "./plant-intake/AnalyzeImage";
 import {InsertPlantForm} from "./plant-intake/InsertPlantForm";
 // navigation/types.ts
-export type AddPlantFromImageStackParamList = {
+export type PlantIntakeStackParamList = {
     AnalyzeImageScreen: { imageUri: string };
     UploadPlantImageFromManualScreen: undefined;
     UploadPlantImageFromGalleryScreen: undefined;
@@ -17,41 +17,41 @@ export type AddPlantFromImageStackParamList = {
     // Add other screens here as needed
 };
 
-const AddPlantFromImageStack = createNativeStackNavigator<AddPlantFromImageStackParamList>()
+const PlantIntakeStack = createNativeStackNavigator<PlantIntakeStackParamList>()
 
 
 function AddPlantFromImageStackScreen() {
     return (
 
-        <AddPlantFromImageStack.Navigator>
-            <AddPlantFromImageStack.Screen
+        <PlantIntakeStack.Navigator>
+            <PlantIntakeStack.Screen
                 name="AddNewPlantsScreen"
                 options={{title: 'Add new plants'}}
                 component={AddPlantScreen}/>
 
-            <AddPlantFromImageStack.Screen
+            <PlantIntakeStack.Screen
                 name="UploadPlantImageFromCameraScreen"
                 options={{title: "Take a Photo"}}
                 component={UploadPlantImageFromCamera}/>
 
-            <AddPlantFromImageStack.Screen
+            <PlantIntakeStack.Screen
                 name="UploadPlantImageFromGalleryScreen"
                 options={{title: "Upload Image"}}
                 component={UploadPlantImageFromGallery}/>
 
-            <AddPlantFromImageStack.Screen
+            <PlantIntakeStack.Screen
                 name="InsertPlantFormScreen"
                 options={{title: "Insert Plant"}}
                 component={InsertPlantForm}
             />
 
-            <AddPlantFromImageStack.Screen
+            <PlantIntakeStack.Screen
                 name="AnalyzeImageScreen"
                 options={{title: "Analyze Image"}}
                 component={AnalyzeImage}
             />
 
-        </AddPlantFromImageStack.Navigator>
+        </PlantIntakeStack.Navigator>
 
     )
 }

@@ -3,7 +3,7 @@ import {
     StyleSheet, KeyboardAvoidingView,
     View, TouchableOpacity, Animated, Platform, Image, TextInput, Text
 } from 'react-native';
-import {AddPlantFromImageStackParamList} from "../AddPlantScreen";
+import {PlantIntakeStackParamList} from "../AddPlantScreen";
 import {RouteProp} from "@react-navigation/native";
 import {DetectedPlant} from "./DetectedPlant";
 import ScrollView = Animated.ScrollView;
@@ -11,7 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 import {addPlant} from "../../../utils/plantsStorage";
 
 
-type AnalyzeImageRouteProp = RouteProp<AddPlantFromImageStackParamList, 'InsertPlantFormScreen'>;
+type AnalyzeImageRouteProp = RouteProp<PlantIntakeStackParamList, 'InsertPlantFormScreen'>;
 
 type Props = {
     route: AnalyzeImageRouteProp;
